@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tabla</title>
+</head>
+<body>
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-body">
+      <tr id="sin-datos">
+        <td colspan="2">Sin datos</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // Obtener el elemento tbody de la tabla
+    const tbody = document.getElementById('tabla-body');
+
+    // Función para dibujar los datos en la tabla
+    function dibujarTabla() {
+      // Obtener los datos del localStorage
+      const datos = JSON.parse(localStorage.getItem('productos'));
+
+      // Limpiar el contenido del tbody
+      tbody.innerHTML = '';
+
+      // Si no hay datos, mostrar una fila que diga "Sin datos"
+      if (!datos || datos.length === 0) {
+        const row = tbody.insertRow();
+        const cell = row.insertCell();
+        cell.colSpan = 2;
+        cell.innerHTML = 'Sin datos';
+        return;
+      }
+
+      // Dibujar una fila por cada objeto en el array
+      for (const dato of datos) {
+        const row = tbody.insertRow();
+        const cell1 = row.insertCell();
+        const cell2 = row.insertCell();
+        cell1.innerHTML = dato.nombre;
+        cell2.innerHTML = dato.edad;
+      }
+    }
+
+    // Llamar a la función dibujarTabla cada medio segundo
+    setInterval(dibujarTabla, 500);
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario</title>
+</head>
+<body>
+  <form>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre"><br><br>
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" name="edad"><br><br>
+    <button type="button" onclick="agregar()">Agregar</button>
+  </form>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-body">
+    </tbody>
+  </table>
+
+  <script>
+    const productos = [];
+    function agregar() {
+      // Obtener los valores del formulario
+      const nombre = document.getElementById('nombre').value;
+      const edad = document.getElementById('edad').value;
+      
+        productos.push({
+            nombre: nombre,
+            edad: edad
+        })
+    
+        localStorage.setItem('productos',JSON.stringify(productos))
+
+      // Obtener el elemento tbody de la tabla
+      const tbody = document.getElementById('tabla-body');
+
+      // Crear una nueva fila
+      const row = tbody.insertRow();
+
+      // Crear celdas para la fila
+      const cell1 = row.insertCell();
+      const cell2 = row.insertCell();
+
+      // Agregar contenido a las celdas
+      cell1.innerHTML = nombre;
+      cell2.innerHTML = edad;
+    }
+  </script>
+</body>
+</html>
+
